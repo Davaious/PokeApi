@@ -24,8 +24,13 @@ function App() {
     fetchData();
   }, []);
 
-  const next = () => {
-    
+  const next = async () => {
+    setLoading(true)
+    let data = await getAllPokemon(nextUrl);
+    await loadingPokemon(data.results);
+    setNextUrl(data.next);
+    setPrevUrl(data.previous);
+    setLoading(false); 
   }
 
   const loadingPokemon = async data => {
