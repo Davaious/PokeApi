@@ -1,15 +1,13 @@
 import React, {useState, useEffect} from "react";
 import { getAllPokemon, getPokemon } from './servicios/pokemon';
 import Card from './componentes/Card'; 
-import Navbar from './componentes/Navbar'; 
-import logo from './logo.svg';
 import './App.css';
 import NavBar from "./componentes/Navbar";
 
 function App() {
   const [pokemonData, setPokemonData ] =useState([]);
   const [nextUrl, setNextUrl] = useState(''); 
-  const [prevurl, setPrevUrl] = useState('');
+  const [prevUrl, setPrevUrl] = useState('');
   const [loading, setLoading] = useState(true);
   const initialUrl = 'https://pokeapi.co/api/v2/pokemon';
 
@@ -30,7 +28,7 @@ function App() {
     await loadingPokemon(data.results);
     setNextUrl(data.next);
     setPrevUrl(data.previous);
-    setLoading(false); 
+    setLoading(false);
   }
 
   const loadingPokemon = async data => {
@@ -51,7 +49,7 @@ function App() {
             loading ? <h1>Pokemons Loading ...</h1> :(
              <>
                 <NavBar />
-             <div className="grid-container">
+             <div className="grid-container img-fondo">
                {pokemonData.map((pokemon,i) => {
                  return <Card key={i} pokemon={pokemon}/>
 
