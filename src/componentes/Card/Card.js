@@ -1,4 +1,4 @@
-import react from 'react';
+ import react from 'react';
 import './style.css';
 
 function Card({ pokemon }) {

@@ -31,6 +31,16 @@ function App() {
     setLoading(false);
   }
 
+  const prev = async () => {
+    if (!prevUrl) return;
+    setLoading(true)
+    let data = await getAllPokemon(prevUrl);
+    await loadingPokemon(data.results);
+    setNextUrl(data.next);
+    setPrevUrl(data.previous);
+    setLoading(false);
+  }
+
   const loadingPokemon = async data => {
     let _pokemonData = await Promise.all(
       data.map(async pokemon => {
@@ -46,15 +56,26 @@ function App() {
   return (
      <div>
        {
-            loading ? <h1>Pokemons Loading ...</h1> :(
+            loading ?( <h1>Pokemons Loading ...</h1> ):
+            (
              <>
                 <NavBar />
+              <div className='btn'>
+                <button onClick={prev}>Prev</button>
+                <button onClick={next}>Next</button>
+              </div>
+
              <div className="grid-container img-fondo">
                {pokemonData.map((pokemon,i) => {
                  return <Card key={i} pokemon={pokemon}/>
 
                })}
              </div>
+
+             <div className='btn'>
+                <button onClick={prev}>Prev</button>
+                <button onClick={next}>Next</button>
+              </div>
              </>
             )
        }
